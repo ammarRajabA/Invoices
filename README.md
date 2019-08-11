@@ -1,53 +1,109 @@
-# Invoices
-## Overview
-**Invoices** is a React JS web application written simply to manage invoices by providing following functionalities:
+# Hypatos Frontend Developer coding challenge
 
- - View list of invoices with simple filtering and search.
- - Edit an invoice.
- - Delete invoice.
- - Create new invoice.
- -  Invoice form validation.
+Congratulations you made it through the initial interview. Now it’s time to show off your coding skills. The following task should be self-explanatory but if you have any questions don’t hesitate to contact us lars.buenting@hypatos.ai / levin.rickert@hypatos.ai. We are happy to help.
 
-## App Structure
-This web app is structured to support scalability by creating **functional** components as modules and separating them from **presentation** components. 
+## Your Task: Create UI for invoice management
 
- - In `components` directory presentation components are placed and they're made in a way that they receive their inputs as `props`and they're not connected by `connect()` to **Redux** store.
+Create a simple single page web application to manage invoices. The application is specificated as follow:
 
- - In `modules` directory functional components or modules are placed and they're connected to the **Redux** store.  Each module is its own directory and represents discrete domain within the application and has its **style**,  **actions**, **reducers** and **test** files.
+Epic from our Product Owner:
 
- - Application has also `api` folder that has **Axios** object along with `__mock__` folder that has **Enzyme** mock for the API module.
+As a Hypatos client, I would like to manage my invoices.
 
- - In the `helpers` there's the `finance` file that is responsible for the math functions and calculations, `mockData` that has static data used during testing, `tests-utils` that has helper functions used in mounting components and connecting them to Redux during testing, and the `validators` functions that validate forms.
 
- - Reducers are combined in the `reducers` directory.
+1. I would like to see a list of my invoices.
 
-## Running
-You can **run** this web app by
+   -  by default show 10 invoices per page, but I want to control that (query params: `page_size` + `page_number`)
+  create a new invoice (2)
+   - go to the invoice edit (3)
+   - go to the invoice detail (4)
+   - delete my invoice
 
- - cloning this **two branches** of this repository (two branches master and backend).
- - `cd` to `backend` directory and run in command line 
-	> npm install
-	> npm start
+2. I would like to create a new invoice (invoice structure see `/invoices/:id`) 
+	 some validations should already run on the frontend side to give quick feedback:
+	 - vat id formatted like DE[0-9]{9}
+   - email format
+   - item qty should be > 0
+   - unit price should be > 0
+   - sender+recipient (name, vatId, email, address1) and dueDate are mandatory
+   
+   example payload to send (body): 
+   ```json
+   {
+     "invoice": {
+       "dueDate": "2099-04-17T11:42:47.881Z",
+   
+       "sender": {
+         "name": "Test User",
+         "email": "test.user@sender.com",
+         "address1": "Some Group",
+         "address2": "Octavia Road, 111",
+         "address3": "39074 North Aliceshire",
+         "vatId": "DE433238140"
+       },
+       "recipient": {
+         "name": "Clarissa Grimes",
+         "email": "clarissa.grimes@sender.com",
+         "address1": "Marquardt Group Group",
+         "address2": "Cronin Stream, 300",
+         "address3": "87471 East Damianhaven",
+         "vatId": "DE353236957"
+       },
+       "items": [
+         {
+           "description": "Unbranded Soft Pants",
+           "qty": 8,
+           "unitPriceNet": 40.10,
+           "taxRate": 0.19
+         }
+       ]
+     }
+   }
+   ```
 
-	This will start the dummy backend on port `2500`.
- - `cd` to the `master` directory and run in command line
-	> yarn
-	> npm start
+3. I would like to update my invoice.
 
-	This will start the ReactJS web app on port `3000`, open your browser to http://localhost:3000/.
+   - fields that can be updated: 
+   - dueDate, items, sender + recipient fields should be editable and validated
 
-You can **test** the app by runnung unit tests by navigating to the master directory and run
+4. I would like to see invoice detail.
 
-> yarn test
+   - the invoice should be presented more or less like a real invoice layout
+   - add calculated value for items: item total before tax (netto), item total after tax (brutto)
+   - add calculated value for invoice: total before tax (netto), total after tax (brutto)
 
-Or if you prefer using **Docker**  you can run this web app simply by running following command in command line
+### Prequisites:
+We already prepared a simple express (nodejs) server with 100 random invoices in this repo.
 
-> docker run ammar123/invoices:small
+- Install its deps: `npm install`
+- Run it with: `npm start`
+- Source code for it is located in `server.js`
 
-Then open your browser to http://localhost:2500/ . Note that we're listening on port 2500 instead of 3000 because this image runs the built version of the React app.
+## Frontend Developer backlog item form retrospective:
 
-## Live version
-This web app is also hosted on **Heroku** you can access this app on the following URL
-  [https://invoices-webapp.herokuapp.com/](https://invoices-webapp.herokuapp.com/)
+As a Frontend Developer, I would like to use a stack that I prefer, and is used at our company ([React](https://reactjs.org/) or [Ember](https://emberjs.com/)). I would like to write tests for my project because I care about the quality. I want to run and deploy my application easier, so I should focus on that.
 
-The **source code of the live backend version** is in the branch **live** in this repository.
+## Ship it!
+
+When you’re done, you may provide a Docker container with instructions on how to run it.
+Please push the source code in a public Github repository for review.
+
+## How we review
+Your application will be reviewed by at least two of our engineers. We do take into consideration your experience level.
+
+- **Architecture**: how clean is the separation between functionalities, is it easy to maintain and add new features
+- **Clarity**: does the README clearly and concisely explains the problem and solution? Are technical tradeoffs explained?
+- **Correctness**: does the application do what was asked? If anything is missing, does the README explain why it is missing?
+- **Code quality**: is the code simple, easy to understand, and maintainable? Are there any code smells or other red flags? Does the object-oriented code follow principles such as the single responsibility principle? Is the coding style consistent with the language's guidelines? Is it consistent throughout the codebase?
+- **Testing**: how thorough are the automated tests? Will they be difficult to change if the application requirements were to change? Are there some unit and some integration tests? We're not looking for full coverage (given time constraint) but just trying to get a feel for your testing skills.
+- **UX**: is the web interface understandable and pleasing to use?
+- **Technical choices**: do choices of libraries, architecture, etc. seem appropriate for the chosen
+application?
+- Does your README contain information on how to run it?
+
+## Bonus points
+If you still have time, think about how to make the app even better... how about: 
+- add sort on ui and api side
+- add a simple search 
+- host it somewhere (e.g. on Amazon EC2, Heroku, Google AppEngine, etc.)
+- rewrite the server side to persist data in a database, with a backend framework of your choice (we use golang and python a lot)

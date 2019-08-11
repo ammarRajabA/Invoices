@@ -1,16 +1,15 @@
 # base image
-FROM node:10
+FROM node:10-alpine
 
 # set working directory
-WORKDIR /app
+WORKDIR /backend
 
-COPY package*.json yarn.lock ./
-RUN yarn
-RUN yarn global add react-scripts@3.0.1
+COPY package*.json ./
+RUN npm install --production
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 2500
 
 # start app
 CMD ["npm", "start"]
