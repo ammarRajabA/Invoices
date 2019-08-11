@@ -42,7 +42,7 @@ You can **test** the app by runnung unit tests by navigating to the master direc
 
 Or if you prefer using **Docker**  you can run this web app simply by running following command in command line
 
-> docker run ammar123/invoices:small
+> docker run -p 2500:2500 ammar123/invoices:small
 
 Then open your browser to http://localhost:2500/ . Note that we're listening on port 2500 instead of 3000 because this image runs the built version of the React app.
 
