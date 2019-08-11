@@ -30,7 +30,7 @@ You can **run** this web app by
 	> npm start
 
 	This will start the dummy backend on port `2500`.
- - `cd` to the `master` directory and run in command line
+ - `cd` to the `master` or `invoices` directory and run in command line
 	> yarn
 	> npm start
 
