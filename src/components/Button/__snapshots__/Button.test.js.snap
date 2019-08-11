@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component match snapshot 1`] = `
+"<Button>
+  <button className=\\"button undefined\\" onClick={[undefined]} />
+</Button>"
+`;

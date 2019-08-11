@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Invoices
+## Overview
+**Invoices** is a React JS web application written simply to manage invoices by providing following functionalities:
 
-## Available Scripts
+ - View list of invoices with simple filtering and search.
+ - Edit an invoice.
+ - Delete invoice.
+ - Create new invoice.
+ -  Invoice form validation.
 
-In the project directory, you can run:
+## App Structure
+This web app is structured to support scalability by creating **functional** components as modules and separating them from **presentation** components. 
 
-### `npm start`
+ - In `components` directory presentation components are placed and they're made in a way that they receive their inputs as `props`and they're not connected by `connect()` to **Redux** store.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ - In `modules` directory functional components or modules are placed and they're connected to the **Redux** store.  Each module is its own directory and represents discrete domain within the application and has its **style**,  **actions**, **reducers** and **test** files.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+ - Application has also `api` folder that has **Axios** object along with `__mock__` folder that has **Enzyme** mock for the API module.
 
-### `npm test`
+ - In the `helpers` there's the `finance` file that is responsible for the math functions and calculations, `mockData` that has static data used during testing, `tests-utils` that has helper functions used in mounting components and connecting them to Redux during testing, and the `validators` functions that validate forms.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - Reducers are combined in the `reducers` directory.
 
-### `npm run build`
+## Running
+You can **run** this web app by
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ - cloning this **two branches** of this repository (two branches master and backend).
+ - `cd` to `backend` directory and run in command line 
+	> npm install
+	> npm start
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+	This will start the dummy backend on port `2500`.
+ - `cd` to the `master` directory and run in command line
+	> yarn
+	> npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+	This will start the ReactJS web app on port `3000`, open your browser to http://localhost:3000/.
 
-### `npm run eject`
+You can **test** the app by runnung unit tests by navigating to the master directory and run
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> yarn test
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Or if you prefer using **Docker**  you can run this web app simply by running following command in command line
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> docker run ammar123/invoices:small
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Then open your browser to http://localhost:2500/ . Note that we're listening on port 2500 instead of 3000 because this image runs the built version of the React app.
 
-## Learn More
+## Live version
+This web app is also hosted on **Heroku** you can access this app on the following URL
+  [https://invoices-webapp.herokuapp.com/](https://invoices-webapp.herokuapp.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The **source code of the live backend version** is in the branch **live** in this repository.
